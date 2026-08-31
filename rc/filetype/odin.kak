@@ -37,8 +37,30 @@ add-highlighter shared/odin/comment region -recurse /\* /\* \*/ fill comment
 add-highlighter shared/odin/inline_documentation region /// $ fill documentation
 add-highlighter shared/odin/line_comment region // $ fill comment
 
-add-highlighter shared/odin/code/ regex "(?<!\w)@\w+\b" 0:meta
-add-highlighter shared/odin/code/operator regex "(=|!|#|@|\$|\^|\?|\+|-|\*|/|%|%%|&|\||~|&~|<<|>>|&&|\|\||\+=|-=|\*=|/=|%=|%%=|&=|\|=|~=|&~=|<<=|>>=|&&=|\|\|=|\+\+|--|---|==|!=|<|>|<=|>=|:|\.\.|\.\.=|\.\.<|\|\*\*)" 1:operator
+add-highlighter shared/odin/code/operator regex "(=|!|#|@|\$|\^|\?|\+|-|\*|/|%|%%|&|\||~|&~|<<|>>|&&|\|\||\+=|-=|\*=|/=|%=|%%=|&=|\|=|~=|&~=|<<=|>>=|&&=|\|\|=|\+\+|--|---|==|!=|<|>|<=|>=|:|(?<!\.)\.\.(?!\.)|\.\.=|\.\.<|\|\*\*)" 1:operator
+# octal
+add-highlighter shared/odin/code/ regex \
+  "\b0o(?i)[0-7][0-7_]*\b" 0:value
+# decimal
+add-highlighter shared/odin/code/ regex \
+  "(?i)\b[+-]?[0-9][0-9_]*(?:\.[0-9][0-9_]*)?(e[+-]?[0-9]+)?[ijk]?\b" 0:value
+# decimal
+add-highlighter shared/odin/code/ regex \
+  "\b0d(?i)[0-9][0-9_]*(e[+-]?[0-9]+)?\b" 0:value
+# dozenal
+add-highlighter shared/odin/code/ regex \
+  "\b0z(?i)[0-9a-b][0-9a-b_]*\b" 0:value
+# hexadecimal
+add-highlighter shared/odin/code/ regex \
+  "\b0x(?i)[0-9a-f][0-9a-f_]*\b" 0:value
+add-highlighter shared/odin/code/build-tag regex \
+  "(#\+\w+)(?: +((?:[\w_-]+\s*)+))?" 1:meta 2:value
+add-highlighter shared/odin/code/directive regex \
+  "#\w+\b" 0:meta
+add-highlighter shared/odin/code/noreturn regex \
+  "\w+ *:: *proc *\([^)]*\) *-> *(!)" 1:red+b
+add-highlighter shared/odin/code/attribute regex \
+  "@(\([^)]+\)|[^\n]+)" 0:meta
 add-highlighter shared/odin/code/function_call regex "\b(\w*)\b\h*(?:\[[\w\s\.,]*\])?\h*\(" 1:function
 
 # Commands
