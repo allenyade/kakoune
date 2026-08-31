@@ -53,6 +53,9 @@ add-highlighter shared/odin/code/ regex \
 # hexadecimal
 add-highlighter shared/odin/code/ regex \
   "\b0x(?i)[0-9a-f][0-9a-f_]*\b" 0:value
+# hexadecimal floating point
+add-highlighter shared/odin/code/ regex \
+  "\b0h(?i)[0-9a-f][0-9a-f_]{3,15}\b" 0:value
 add-highlighter shared/odin/code/build-tag regex \
   "(#\+\w+)(?: +((?:[\w_-]+\s*)+))?" 1:meta 2:value
 add-highlighter shared/odin/code/directive regex \
